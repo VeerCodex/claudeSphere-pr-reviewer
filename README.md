@@ -1,68 +1,105 @@
-# IBM Hackathon GitHub Project Template
+# 🔍 PR Reviewer
 
-This GitHub project template is for IBM Hackathon projects. It includes pre-configured security files to help prevent accidental credential commits and potential account suspension during the hackathon.
+> **Built for IBM Bob 2.0 Hackathon 🤖**
 
-## 🚀 Quick Start
-
-1. **Use this template to create your project:**
-   - Click "Use this template" button above and select "Create a new repository"
-   - Name your repository
-   - Click "Create repository"
-
-2. **Clone your new repository:**
-
-   ```bash
-   git clone https://github.com/HACKATHON-ORG/your-repo-name.git
-   cd your-repo-name
-   ```
-
-3. **Set up environment variables:**
-
-   ```bash
-   # Copy the example file
-   cp .env.example .env
-
-   # Edit .env with your actual credentials
-   # Use your preferred editor (nano, vim, code, etc.)
-   nano .env
-   ```
-
-4. **Verify .gitignore is working:**
-
-   ```bash
-   # This should NOT show .env file
-   git status
-
-   # This should confirm .env is ignored
-   git check-ignore -v .env
-   ```
-
-5. **Start developing!**
-
-## 🔒 Security Features
-
-This template includes:
-
-- **`.gitignore`** - Prevents committing credentials and live session files
-- **`.bobignore`** - Prevents AI assistants from logging credentials
-- **`.env.example`** - Template for your environment variables
-
-## 📋 Before Every Commit
-
-Always run this checklist:
-
-- [ ] Reviewed `git diff` for sensitive data
-- [ ] No hardcoded API keys or passwords
-- [ ] `.env` file is NOT in staged changes
-- [ ] No files with "credential" or "secret" in name
-- [ ] Used environment variables for all credentials
-
-## 🆘 Need Help?
-
-- Read [SECURITY.md](SECURITY.MD) for detailed guidelines
-- Contact hackathon support through mentor channel
-- Ask in the hackathon Slack workspace
+An AI-powered pull request reviewer. Paste any raw code diff directly into the page — no GitHub login, no OAuth, no setup. Get an instant structured report powered by **Gemini 2.5 Flash**.
 
 ---
 
-**Remember:** Security is everyone's responsibility. When in doubt, ask for help!
+## ✨ Features
+
+- **Paste & Review** — drop any raw `git diff` output into the textarea and hit submit
+- **Three-section AI report:**
+  - ⚠️ Risky / Breaking Changes
+  - 🧪 Missing Test Coverage
+  - 📝 Unclear / Missing Commit Messages
+- **Light / Dark theme toggle** — smooth gradient themes, no page reload
+- **Zero friction** — no auth, no accounts, no GitHub API
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 15 (App Router, TypeScript) |
+| Styling | Tailwind CSS v3 |
+| AI Model | Gemini 2.5 Flash (`@google/generative-ai`) |
+| Runtime | Node.js (server-side API route) |
+
+---
+
+## 🚀 Quick Start
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/VeerCodex/claudeSphere-pr-reviewer.git
+cd claudeSphere-pr-reviewer
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Add your Gemini API key
+
+Create a `.env.local` file in the project root:
+
+```bash
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+> Get a free API key at [Google AI Studio](https://aistudio.google.com/app/apikey)
+
+### 4. Run the dev server
+
+```bash
+npm run dev
+```
+
+Open **http://localhost:3000** in your browser.
+
+---
+
+## 📁 Project Structure
+
+```
+claudeSphere-pr-reviewer/
+├── app/
+│   ├── page.tsx              ← Single-page UI (textarea + results)
+│   ├── layout.tsx            ← Root layout with Tailwind
+│   ├── globals.css           ← Tailwind directives
+│   └── api/
+│       └── review/
+│           └── route.ts      ← POST /api/review → Gemini API
+├── lib/
+│   └── gemini.ts             ← Gemini client + prompt + parser
+├── .env.local                ← Your API key (gitignored)
+└── ...config files
+```
+
+---
+
+## 🔒 Security
+
+- `.env.local` is gitignored — your API key is never committed
+- All credentials stay server-side — the Gemini API key is only used in the Next.js API route, never exposed to the browser
+- See [SECURITY.MD](SECURITY.MD) for full guidelines
+
+---
+
+## 🤖 Built with IBM Bob 2.0
+
+This entire project — architecture, scaffolding, API integration, UI, and theming — was built using **IBM Bob 2.0** as the AI coding assistant:
+
+- **Plan mode** → designed the 3-task architecture
+- **Agent mode** → generated every file, resolved dependency vulnerabilities, and hot-reloaded the running server
+
+---
+
+## 📄 License
+
+MIT
